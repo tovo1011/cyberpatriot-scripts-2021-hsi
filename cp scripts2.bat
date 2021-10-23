@@ -128,7 +128,7 @@ color 0A
 	reg ADD "HKLM\SYSTEM\CurrentControlSet\services\Netlogon\Parameters" /v SignSecureChannel /t REG_DWORD /d 1 /f
 	
 	rem Seal Channel
-	reg "ADD HKLM\SYSTEM\CurrentControlSet\services\Netlogon\Parameters" /v SealSecureChannel /t REG_DWORD /d 1 /f
+	reg ADD "HKLM\SYSTEM\CurrentControlSet\services\Netlogon\Parameters" /v SealSecureChannel /t REG_DWORD /d 1 /f
 	
 	rem Enables DEP
 	bcdedit.exe /set {current} nx AlwaysOn
