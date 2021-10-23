@@ -12,11 +12,11 @@ color 0A
 	echo "4)lockout policy"
 	echo "5)security options"
 	set /p response=Please choose an option: 
-		if %response% == "1" goto :firewall
-		if %response% == "2" goto :disableservices
-		if %response% == "3" goto :passwordpol
-		if %response% == "4" goto :lockoutpol
-		if %response% == "5" goto :securityOptions
+		if "%response%" == "1" goto :firewall
+		if "%response%" == "2" goto :disableservices
+		if "%response%" == "3" goto :passwordpol
+		if "%response%" == "4" goto :lockoutpol
+		if "%response%" == "5" goto :securityOptions
 	
 	pause
 		
@@ -107,7 +107,8 @@ color 0A
     	reg ADD HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v everyoneincludesanonymous /t REG_DWORD /d 0 /f 
 	rem SMB Passwords unencrypted to third party
     	reg ADD HKLM\SYSTEM\CurrentControlSet\services\LanmanWorkstation\Parameters /v EnablePlainTextPassword /t REG_DWORD /d 0 /f
-	rem Restict anonymous access to named pipes and sharesreg ADD HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters /v NullSessionShares /t REG_MULTI_SZ /d "" /f
+	rem Restict anonymous access to named pipes and shares
+	reg ADD HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters /v NullSessionShares /t REG_MULTI_SZ /d "" /f
 	rem Restict anonymous access to named pipes and shares
 	reg ADD HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters /v NullSessionShares /t REG_MULTI_SZ /d "" /f
 	
