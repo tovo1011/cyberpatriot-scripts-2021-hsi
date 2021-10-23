@@ -1,5 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
+net session
 title CPscripts HSISL
 color 0A
  
