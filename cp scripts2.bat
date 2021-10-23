@@ -11,7 +11,7 @@ color 0A
 	echo "3)password policy"
 	echo "4)lockout policy"
 	echo "5)security options"
-	edho "6)auto update stuff"
+	echo "6)auto update stuff"
 	set /p response=Please choose an option: 
 		if "%response%" == "1" goto :firewall
 		if "%response%" == "2" goto :disableservices
