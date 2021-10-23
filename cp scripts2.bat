@@ -12,6 +12,7 @@ color 0A
 	echo "4)lockout policy"
 	echo "5)security options"
 	echo "6)auto update stuff"
+	echo "7)user properties"
 	set /p response=Please choose an option: 
 		if "%response%" == "1" goto :firewall
 		if "%response%" == "2" goto :disableservices
@@ -19,7 +20,7 @@ color 0A
 		if "%response%" == "4" goto :lockoutpol
 		if "%response%" == "5" goto :securityOptions
 		if "%response%" == "6" goto :autoUpdate
-	
+		if "%response%" == "7" goto :userProp
 	pause
 		
 
@@ -137,6 +138,15 @@ color 0A
 	rem Turn on automatic updates
 	echo Turning on automatic updates
 	reg add "HKLM\SOFTWARE\Microsoft\WINDOWS\CurrentVersion\WindowsUpdate\Auto Update" /v AUOptions /t REG_DWORD /d 4 /f
+
+	pause
+	goto :menu
+
+:userProp
+	echo Setting password never expires
+	wmic UserAccount set PasswordExpires=True
+	wmic UserAccount set PasswordChangeable=True
+	wmic UserAccount set PasswordRequired=True
 
 	pause
 	goto :menu
