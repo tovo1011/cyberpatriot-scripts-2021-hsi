@@ -11,6 +11,7 @@ color 0A
 	echo "3)password policy"
 	echo "4)lockout policy"
 	echo "5)security options"
+	edho "6)auto update stuff"
 	set /p response=Please choose an option: 
 		if "%response%" == "1" goto :firewall
 		if "%response%" == "2" goto :disableservices
@@ -98,18 +99,39 @@ color 0A
 	
 	rem Idle Time Limit - 45 mins
 	reg ADD "HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters" /v autodisconnect /t REG_DWORD /d 45 /f 
+	
 	rem Enable Installer Detection
         reg ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableInstallerDetection /t REG_DWORD /d 1 /f
-        rem Restrict Anonymous Enumeration #1
+        
+	rem Restrict Anonymous Enumeration #1
     	reg ADD "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v restrictanonymous /t REG_DWORD /d 1 /f 
-    	rem Restrict Anonymous Enumeration #2
+    	
+	rem Restrict Anonymous Enumeration #2
     	reg ADD "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v restrictanonymoussam /t REG_DWORD /d 1 /f 
+	
 	rem Don't Give  Everyone Permissions
     	reg ADD "HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v everyoneincludesanonymous" /t REG_DWORD /d 0 /f 
+	
 	rem SMB Passwords unencrypted to third party
     	reg ADD "HKLM\SYSTEM\CurrentControlSet\services\LanmanWorkstation\Parameters" /v EnablePlainTextPassword /t REG_DWORD /d 0 /f
+	
 	rem Restict anonymous access to named pipes and shares
 	reg ADD "HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters" /v NullSessionShares /t REG_MULTI_SZ /d "" /f
+	
+	rem Require Strong Session Key
+	reg ADD "HKLM\SYSTEM\CurrentControlSet\services\Netlogon\Parameters" /v RequireStrongKey /t REG_DWORD /d 1 /f
+	
+	rem Require Sign/Seal
+	reg ADD "HKLM\SYSTEM\CurrentControlSet\services\Netlogon\Parameters" /v RequireSignOrSeal /t REG_DWORD /d 1 /f
+	
+	rem Sign Channel
+	reg ADD "HKLM\SYSTEM\CurrentControlSet\services\Netlogon\Parameters" /v SignSecureChannel /t REG_DWORD /d 1 /f
+	
+	rem Seal Channel
+	reg "ADD HKLM\SYSTEM\CurrentControlSet\services\Netlogon\Parameters" /v SealSecureChannel /t REG_DWORD /d 1 /f
+	
+	rem Enables DEP
+	bcdedit.exe /set {current} nx AlwaysOn
 	
 :autoUpdate
 	rem Turn on automatic updates
