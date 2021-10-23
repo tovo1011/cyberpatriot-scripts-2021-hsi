@@ -87,7 +87,7 @@ color 0A
 	REM setting lockout policy
 	echo setting lockout policy
 	net accounts /lockoutduration:30
-	net accounts /lockoutthreshold:3
+	net accounts /lockoutthreshold:10
 	net accounts /lockoutwindow:30
 	
 	pause
