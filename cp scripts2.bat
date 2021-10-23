@@ -110,8 +110,7 @@ color 0A
     	reg ADD "HKLM\SYSTEM\CurrentControlSet\services\LanmanWorkstation\Parameters" /v EnablePlainTextPassword /t REG_DWORD /d 0 /f
 	rem Restict anonymous access to named pipes and shares
 	reg ADD "HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters" /v NullSessionShares /t REG_MULTI_SZ /d "" /f
-	rem Restict anonymous access to named pipes and shares
-	reg ADD "HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters" /v NullSessionShares /t REG_MULTI_SZ /d "" /f
+	
 :autoUpdate
 	rem Turn on automatic updates
 	echo Turning on automatic updates
