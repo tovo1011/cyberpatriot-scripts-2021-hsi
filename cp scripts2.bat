@@ -77,7 +77,7 @@ color 0A
 	REM setting password lockout policy
 	REM setting complexity
 	echo setting password policy
-	net accounts /minpwlen:8
+	net accounts /minpwlen:12
 	net accounts /maxpwage:60
 	net accounts /minpwage:10
 	net accounts /uniquepw:3
